@@ -13,7 +13,7 @@ house_data %>%
     ylab = "Ideological Spectrum (+ indicates conservative, - indicates liberal)",
     type = "l",
     col = rgb(0.5, 0.2, 0.5),
-    ylim=range(c(-0.6, 0.6))
+    ylim=c(-0.6, 0.6)
   )
 
 par(new = TRUE)
@@ -27,7 +27,7 @@ house_data %>%
     xlab = "",
     type = "l",
     col = rgb(0.85, 0.25, 0.15),
-    ylim=range(c(-0.6, 0.6))
+    ylim=c(-0.6, 0.6)
   )
 
 par(new = TRUE)
@@ -41,9 +41,19 @@ house_data %>%
     xlab = "",
     type = "l",
     col = rgb(0.15, 0.25, 0.85),
-    ylim=range(c(-0.6, 0.6))
+    ylim=c(-0.6, 0.6)
   )
 
+abline(v = 2016, col = "lightgray") # election of Donald J. Trump
+abline(v = 2000, col = "lightgray") # infamous 2000 election
+abline(v = 1980, col = "lightgray") # election of Ronald Reagan
+abline(v = 1963, col = "lightgray") # Civil Rights Movement takes forefront of national headline
+abline(v = 1950, col = "lightgray") # America joins Vietnam War
+abline(v = 1941, col = "lightgray") # America joins World War II
+abline(v = 1929, col = "lightgray") # Great Depression begins
+abline(v = 1917, col = "lightgray") # America joins World War I
+abline(v = 1888, col = "lightgray") # heavily contested 1888 election
+abline(v = 1876, col = "lightgray") # heavily contested 1876 election
 
 legend(
     "topleft", 
