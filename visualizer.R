@@ -86,7 +86,54 @@ quartz()
 
 display_data(senate_data, "Polarization in Senate")
 
+library(plotly)
+
+#voting_data <- get(load("data/voting_trends.RData"))
+
+voting_data <- read.csv("data/voting.csv")
+
+simplified_data <- voting_data[which(voting_data$party_simplified == "DEMOCRAT" | voting_data$party_simplified == "REPUBLICAN"), ]
+
+simplified_data <- simplified_data[order(simplified_data$candidatevotes), ]
+
+simplified_data$hover <- simplified_data %>% with(
+  paste(
+    "Winner:", 
+    candidate, 
+    "Party: ",
+    party_detailed
+  )
+)
+
+l <- list(color = toRGB("white"), width = 2)
+
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = toRGB('white')
+)
+
+fig <- simplified_data %>% 
+  plot_geo(
+    locationmode = "USA-states"
+  )
+fig <- fig %>% add_trace(
+  text = ~hover,
+  locations = ~state_po,
+  frame = ~year
+  )
+
+fig <- fig %>% layout(
+    title = "Presidential Election Results by State Over Time<br>(Hover for breakdown)",
+    geo = g,
+    xaxis = list(
+      type = "log"
+    )
+  )
+
+fig
+
 rm(list = ls()) 
 
 pacman::p_unload(all)
-detach("package:datasets", unload = TRUE) 
