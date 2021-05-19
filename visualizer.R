@@ -11,7 +11,7 @@ display_data <- function(plot_data, label) {
     ((rep.mean.d1+dem.mean.d1)/2) ~ year,
     data = . ,
     main = label,
-    sub  = "(Source: datasets::voteview_polarization_data)",
+    sub  = "(Source: voteview_polarization_data)",
     ylab = "Ideological Spectrum (+ indicates conservative, - indicates liberal)",
     type = "l",
     col = rgb(0.5, 0.2, 0.5),
@@ -119,12 +119,12 @@ fig <- simplified_data %>%
   )
 
 fig <- fig %>% add_trace(
+  z = ~ (candidatevotes/totalvotes),
   text = ~ hover,
   locations =  ~ state_po,
   frame = ~ year,
   color = ~ (candidatevotes/totalvotes),
-  z = ~ (candidatevotes/totalvotes),
-  colors = "Blues"
+  colors = "Reds"
   )
 
 fig <- fig %>% colorbar(title = "Percentage of Votes Won")
