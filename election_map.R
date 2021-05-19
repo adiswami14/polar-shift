@@ -7,7 +7,7 @@ simplified_data <- voting_data[which(voting_data$party_simplified == "DEMOCRAT" 
 
 simplified_data <- simplified_data[order(-simplified_data$candidatevotes), ]
 
-simplified_data <- simplified_data %>% mutate(winner = if_else(party_simplified == "DEMOCRAT", (candidatevotes/totalvotes), -1*candidatevotes/totalvotes))
+simplified_data <- simplified_data %>% mutate(winner = if_else(party_simplified == "DEMOCRAT", (candidatevotes/totalvotes), -1 * (candidatevotes/totalvotes)))
 
 simplified_data$hover <- simplified_data %>% with(
   paste(
@@ -18,7 +18,7 @@ simplified_data$hover <- simplified_data %>% with(
     party_detailed, 
     "<br>", 
     "Percentage Won: ",
-    abs(winner)*100,
+    round(abs(winner)*100, 1),
     "%"
   )
 )
@@ -33,8 +33,8 @@ g <- list(
 
 fig <- simplified_data %>% 
   plot_geo(
-    locationmode = "USA-states",
-    showscale = F
+    locationmode = "USA-states"
+    #showscale = F
   )
 
 fig <- fig %>% add_trace(
@@ -44,7 +44,7 @@ fig <- fig %>% add_trace(
   locations =  ~ state_po,
   frame = ~ year,
   color = "Red"
-  )
+)
 
 fig <- fig %>% hide_colorbar()
 
