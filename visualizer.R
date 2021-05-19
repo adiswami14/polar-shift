@@ -94,7 +94,7 @@ voting_data <- read.csv("data/voting.csv")
 
 simplified_data <- voting_data[which(voting_data$party_simplified == "DEMOCRAT" | voting_data$party_simplified == "REPUBLICAN"), ]
 
-simplified_data <- simplified_data[order(simplified_data$candidatevotes), ]
+simplified_data <- simplified_data[order(-simplified_data$candidatevotes), ]
 
 simplified_data$hover <- simplified_data %>% with(
   paste(
@@ -110,19 +110,24 @@ l <- list(color = toRGB("white"), width = 2)
 g <- list(
   scope = 'usa',
   projection = list(type = 'albers usa'),
-  showlakes = TRUE,
-  lakecolor = toRGB('white')
+  showlakes = F
 )
 
 fig <- simplified_data %>% 
   plot_geo(
     locationmode = "USA-states"
   )
+
 fig <- fig %>% add_trace(
-  text = ~hover,
-  locations = ~state_po,
-  frame = ~year
+  text = ~ hover,
+  locations =  ~ state_po,
+  frame = ~ year,
+  color = ~ (candidatevotes/totalvotes),
+  z = ~ (candidatevotes/totalvotes),
+  colors = "Blues"
   )
+
+fig <- fig %>% colorbar(title = "Percentage of Votes Won")
 
 fig <- fig %>% layout(
     title = "Presidential Election Results by State Over Time<br>(Hover for breakdown)",
