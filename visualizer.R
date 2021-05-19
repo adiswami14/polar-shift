@@ -129,6 +129,7 @@ fig <- simplified_data %>%
 fig <- fig %>% add_trace(
   z = ~ if_else(winner < 0, -(1+winner), (1-winner)),
   text = ~ hover,
+  hoverinfo = "text",
   locations =  ~ state_po,
   frame = ~ year,
   color = "Red"
