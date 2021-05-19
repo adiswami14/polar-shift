@@ -33,8 +33,8 @@ g <- list(
 
 fig <- simplified_data %>% 
   plot_geo(
-    locationmode = "USA-states"
-    #showscale = F
+    locationmode = "USA-states",
+    showscale = F
   )
 
 fig <- fig %>% add_trace(
