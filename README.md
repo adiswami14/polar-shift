@@ -5,3 +5,6 @@ A tool for the visualization of political polarization in the United States, and
 
 Check out this gif to see how the election plot works:
 ![election map gif](https://github.com/adiswami14/polar-shift/blob/main/Hnet-image.gif)
+
+
+When clicking the `play` button, this map can also render a playthrough of the different election results, so it is easy to visualize how the voting trends have shifted in the past, and how they continue to shift in the present day. 
